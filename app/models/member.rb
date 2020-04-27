@@ -5,4 +5,7 @@ class Member < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :messages
+
+  validates_uniqueness_of :username, case_sensitive: false
+  validates_uniqueness_of :email, case_sensitive: false
 end
