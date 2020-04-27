@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Messages</h2>
+  <% if member_signed_in? %>
+    <%= link_to 'New Message', new_message_path %>
+  <% end %>
+  <% @messages.each do |message| %>
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <% if member_signed_in? %>
+            <strong><%= message.member.username %></strong>
+          <% else %>
+            <strong>Undisclosed User</strong>
+          <% end %>
+          <p><%= message.message %></p>
+          <tr>
+            <td><%= link_to 'Show', message %></td>
+            <td><%= link_to 'Edit', edit_message_path(message) %></td>
+            <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        </div>
+      </div>
+    </article>
+  <% end %>
+</div>

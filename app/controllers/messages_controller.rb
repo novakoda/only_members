@@ -4,7 +4,8 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    @messages = Message.all.order("created_at DESC")
+    @message = Message.new
   end
 
   # GET /messages/1
@@ -14,7 +15,7 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
-    @message = Message.new
+    @message = current_member.messages.build
   end
 
   # GET /messages/1/edit
@@ -24,7 +25,7 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
+    @message = current_member.messages.build(message_params)
 
     respond_to do |format|
       if @message.save
